@@ -31,15 +31,8 @@ module.exports = (connection, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
-            set(value) {
-                this.setDataValue('password', bcrypt.hashSync(value))
-            },
-            validate: {
-                len: [4, 15],
-                notNull: {
-                    msg: 'Please enter your password',
-                },
-            }
+
+
         },
         email: {
             type: Sequelize.STRING,
@@ -65,24 +58,13 @@ module.exports = (connection, Sequelize) => {
             }
         },
         identityId: {//شناسنامه
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false,
-            validate: {
-                len: [10, 10],
-                notNull: {
-                    msg: 'Please enter your identityId',
-                },
-            }
+
         },
         nationalCard: {// شماره ملی
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            validate: {
-                len: [4, 10],
-                notNull: {
-                    msg: 'Please enter your nationalCard',
-                },
-            }
+            type: Sequelize.STRING,
+
         },
         job: {
             type: Sequelize.STRING,
@@ -90,15 +72,15 @@ module.exports = (connection, Sequelize) => {
         phone: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate: {
-                is: /(\+98|0)9\d{9}$/i
-            },
-            unique: {
-                args: true,
-                msg: "mobileValidate"
-            }
+
         },
         address: {
+            type: Sequelize.STRING,
+        },
+        balance: {
+            type: Sequelize.STRING,
+        },
+        otp: {
             type: Sequelize.STRING,
         },
     }, {

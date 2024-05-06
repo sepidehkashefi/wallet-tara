@@ -89,7 +89,7 @@ exports.login = async (_req, _res) => {
 
         }).then(async (_result) => {
 
-
+            console.log(_result)
             if (_result) {
 
 
@@ -102,6 +102,73 @@ exports.login = async (_req, _res) => {
         })
             .catch(error => {
 
+                _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
+            })
+    }
+    else
+        _res.status(400).send({ message: resMessage.BAD_REQUEST_400.error_input })
+}
+
+
+// localhost:8888/user/requestotp
+// method post
+exports.requestOtp = async (_req, _res) => {
+
+    if (_req.body.email && _req.body.email.trim().length > 0) {
+
+        await User.findOne({
+            where: {
+                [Op.or]: [{ email: _req.body.email }]
+            }
+
+        }).then(async (_result) => {
+
+            if (_result) {
+
+                const randomNum = Math.random() * 9000
+                const formattedRandomNum = Math.floor(randomNum)
+
+                await User.update({ otp: formattedRandomNum }, {
+                    where: {
+                        email: _req.body.email
+                    }
+                })
+           
+                _res.status(200).send({ message: resMessage.OK_200, formattedRandomNum })
+            }
+
+        })
+            .catch(error => {
+
+                _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
+            })
+
+    }
+    else
+        _res.status(400).send({ message: resMessage.BAD_REQUEST_400.error_input })
+}
+
+// localhost:8888/user/requestotp
+// method post
+exports.sendOtp = async (_req, _res) => {
+
+    if (_req.body.email && _req.body.email.trim().length > 0 && _req.body.otp) {
+
+        await User.findOne({
+            where: {
+                [Op.or]: [{ email: _req.body.email, otp: _req.body.otp }]
+            }
+
+        }).then(async (_result) => {
+
+            if (_result) {
+
+                var token = jwt.sign({ name: _req.body.email, id: _result.u_id, isAdmin: _result.isAdmin }, 'tara');
+                _res.status(200).send({ message: resMessage.OK_200, token })
+            }
+
+        })
+            .catch(error => {
                 _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
             })
     }

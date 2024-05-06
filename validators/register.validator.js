@@ -8,11 +8,14 @@ const registerSchema = Joi.object({
     password: Joi.string().min(4).required(),
     isActive: Joi.string(),
     isAdmin: Joi.string(),
-    identityId: Joi.number().required(),
-    nationalCard: Joi.number(),
+    identityId: Joi.string().required(),
+    nationalCard: Joi.string(),
     job: Joi.string(),
     phone: Joi.number().required(),
     address: Joi.string(),
+    balance: Joi.string(),
+    otp: Joi.string(),
+
 });
 
 module.exports = registerSchema;

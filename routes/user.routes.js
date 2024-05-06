@@ -18,4 +18,7 @@ module.exports = function (app) {
 	app.patch('/user/activeuser', [auth.verifyToken, admin.isAdmin], controller.activeUser)
 	app.post('/user/login', [Validator('login')], controller.login)
 	app.get('/user/list', [auth.verifyToken, admin.isAdmin], controller.list)
+	app.post('/user/requestotp', controller.requestOtp)
+	app.post('/user/sendotp', controller.sendOtp)
+	
 }

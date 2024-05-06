@@ -15,19 +15,11 @@ const verifyToken = (_req, _res, _next) => {
 	
 	token = _req.token
 	if (!token) {
-
-		// if (_req.route.path == '/qa/listbyviewCount') {
-		// 	_req.isListByViewCount = true
-		// 	return _next()
-
-		// } else {
-
-			return _res.status(401).send({
+            	return _res.status(401).send({
 				message: 'توکن وجود ندارد'
 			})
-		//}
-
 	}
+	
 	jwt.verify(token, config.secret, async (err, decoded) => {
 		if (err) {
 			return _res.status(402).send({ message: 'دسترسی لازم وجود ندارد' })
