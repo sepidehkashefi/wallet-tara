@@ -10,13 +10,13 @@
 			"name": "user",
 			"item": [
 				{
-					"name": "add user",
+					"name": "auth signup",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"ayda\",\r\n    \"lastName\": \"kashefi\",\r\n    \"email\": \"ayda@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"identityId\": \"5050049455\",\r\n    \"phone\": \"09039403155\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"ayda3\",\r\n    \"lastName\": \"kashefi2\",\r\n    \"email\": \"ayda3@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"identityId\": \"5050049455\",\r\n    \"phone\": \"09039403155\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,51 +24,22 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/user/add",
+							"raw": "http://localhost:8888/auth/signup",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"user",
-								"add"
+								"auth",
+								"signup"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "active User",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"email\": \"ayda@gmail.com\",\r\n   \"isActive\":\"active\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8888/user/activeuser",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8888",
-							"path": [
-								"user",
-								"activeuser"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "user login",
+					"name": "auth signin",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -82,15 +53,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/user/login",
+							"raw": "http://localhost:8888/auth/signin",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"user",
-								"login"
+								"auth",
+								"signin"
 							]
 						}
 					},
@@ -103,7 +74,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\"\r\n\r\n}",
+							"raw": "{\r\n    \"email\": \"ayda2@gmail.com\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\",\r\n    \"otp\": \"5694\"\r\n}",
+							"raw": "{\r\n    \"email\": \"ayda2@gmail.com\",\r\n    \"otp\": \"3142\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,6 +207,16 @@
 				{
 					"name": "account delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -248,16 +229,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/account/delete/95bf3f25-ea55-4e07-b9ce-1ad2fb90e5ae",
+							"raw": "http://localhost:8888/bank-accounts/adfe8eab-1ee7-41be-85bc-cc950414e91a",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"account",
-								"delete",
-								"95bf3f25-ea55-4e07-b9ce-1ad2fb90e5ae"
+								"bank-accounts",
+								"adfe8eab-1ee7-41be-85bc-cc950414e91a"
 							]
 						}
 					},
@@ -270,7 +250,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bankName\": \"melli\",\r\n    \"branchName\": \"ferdosi\",\r\n    \"branchCode\": \"1234\",\r\n    \"cardNumber\": \"1212121212121214\",\r\n    \"cvv2\": \"123\",\r\n    \"userId\":\"7a28379d-88ed-43fc-98c8-6ae7713393e1\"\r\n}",
+							"raw": "{\r\n    \"bankName\": \"melli\",\r\n    \"branchName\": \"ferdosi\",\r\n    \"branchCode\": \"1234\",\r\n    \"cardNumber\": \"1212121212121216\",\r\n    \"cvv2\": \"123\",\r\n    \"userId\":\"7a28379d-88ed-43fc-98c8-6ae7713393e1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -278,15 +258,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/account/add",
+							"raw": "http://localhost:8888/bank-accounts/5dd0b0a4-3f04-49b3-be9d-60fe3d6f9f51",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"account",
-								"add"
+								"bank-accounts",
+								"5dd0b0a4-3f04-49b3-be9d-60fe3d6f9f51"
 							]
 						}
 					},
@@ -298,6 +278,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -357,18 +347,30 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
 				{
-					"name": "confirm deposit and withdraw",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "active User",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n   \"email\": \"ayda3@gmail.com\",\r\n   \"isActive\":\"active\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -376,32 +378,41 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/transaction/accept/f452e60e-5121-4c08-8bde-76d7c6217d4d",
+							"raw": "http://localhost:8888/admin/activateuser",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"transaction",
-								"accept",
-								"f452e60e-5121-4c08-8bde-76d7c6217d4d"
+								"admin",
+								"activateuser"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "list",
+					"name": "get user list",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"a_id\": \"b18436c8-5d10-4b72-96ce-c81a5aa41b43\",\r\n    \"u_id\": \"7a28379d-88ed-43fc-98c8-6ae7713393e1\",\r\n\r\n    \"wage\": 0.09,\r\n    \"typeOperation\": \"deposit\",\r\n    \"amount\": \"12\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -409,79 +420,105 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8888/transaction/list",
+							"raw": "http://localhost:8888/admin/getuserlist",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"transaction",
-								"list"
+								"admin",
+								"getuserlist"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "list deposits",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "transaction all list",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8888/transaction/deposits/list",
+							"raw": "http://localhost:8888/admin/transactions",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"transaction",
-								"deposits",
-								"list"
+								"admin",
+								"transactions"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "withdrawals list",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "transaction deposit list",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8888/transaction/withdrawals/list",
+							"raw": "http://localhost:8888/admin/deposits",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8888",
 							"path": [
-								"transaction",
-								"withdrawals",
-								"list"
+								"admin",
+								"deposits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transaction withdraw list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/admin/withdrawals",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"admin",
+								"withdrawals"
 							]
 						}
 					},
