@@ -7,12 +7,11 @@ const app = express();
 db.connection.sync(
     {
         alter:
-            // { drop: false },
-            true
+        // { drop: false },
+        true
         // force : true
     })
     .then(async () => {
-
         // await seeds();
     })
 
@@ -23,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // routes
 require('./routes')(app)
-
 
 // set port, listen for requests
 const PORT = process.env.PORT;

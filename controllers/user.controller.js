@@ -5,6 +5,7 @@ const Op = db.Op
 const resMessage = require('../config/responseMessage.config');
 var jwt = require('jsonwebtoken');
 const { isAdmin } = require('../middleware/admin.middleware');
+const { Result } = require('tedious/lib/token/helpers');
 
 // localhost:8888/user/add
 // method post
@@ -133,7 +134,7 @@ exports.requestOtp = async (_req, _res) => {
                         email: _req.body.email
                     }
                 })
-           
+
                 _res.status(200).send({ message: resMessage.OK_200, formattedRandomNum })
             }
 
@@ -174,4 +175,49 @@ exports.sendOtp = async (_req, _res) => {
     }
     else
         _res.status(400).send({ message: resMessage.BAD_REQUEST_400.error_input })
+}
+
+// localhost:8888/user/getwalletbalance
+// method get
+exports.getWalletBalance = async (_req, _res) => {
+
+
+    await User.findOne({
+        where: {
+            u_id: _req.userId
+        }
+
+    }).then(async (_result) => {
+
+        if (_result) {
+            _res.status(200).send({ message: resMessage.OK_200, balance: _result.balance })
+        }
+
+    })
+        .catch(error => {
+            _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
+        })
+}
+
+
+// localhost:8888/user/getwalletbalance
+// method get
+exports.getWalletBalance = async (_req, _res) => {
+
+
+    await User.findOne({
+        where: {
+            u_id: _req.userId
+        }
+
+    }).then(async (_result) => {
+
+        if (_result) {
+            _res.status(200).send({ message: resMessage.OK_200, balance: _result.balance })
+        }
+
+    })
+        .catch(error => {
+            _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
+        })
 }

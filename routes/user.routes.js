@@ -14,11 +14,16 @@ module.exports = function (app) {
 	})
 
 
-	app.post('/user/add',[Validator('register')], controller.add)
+	app.post('/user/add', [Validator('register')], controller.add) //`POST /auth/signup`
+	app.post('/user/login', [Validator('login')], controller.login) //`POST /auth/signin`
+
 	app.patch('/user/activeuser', [auth.verifyToken, admin.isAdmin], controller.activeUser)
-	app.post('/user/login', [Validator('login')], controller.login)
 	app.get('/user/list', [auth.verifyToken, admin.isAdmin], controller.list)
-	app.post('/user/requestotp', controller.requestOtp)
-	app.post('/user/sendotp', controller.sendOtp)
+
+	app.post('/user/requestotp', controller.requestOtp)// OTP request
+	app.post('/user/sendotp', controller.sendOtp) // user send OTP
+
+	app.get('/user/getwalletbalance', [auth.verifyToken], controller.getWalletBalance)// GET /wallet/balance
 	
+
 }
