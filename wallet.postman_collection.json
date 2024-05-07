@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "dcbb3f17-a077-47db-b33f-bd90c7ff0dab",
+		"name": "wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25101299"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"ayda\",\r\n    \"lastName\": \"kashefi\",\r\n    \"email\": \"ayda@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"identityId\": \"5050049455\",\r\n    \"phone\": \"09039403155\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "active User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"ayda@gmail.com\",\r\n   \"isActive\":\"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/activeuser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"activeuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "request otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/requestotp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"requestotp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\",\r\n    \"otp\": \"5694\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/sendotp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"sendotp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wallet balance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA2ODYwOX0.KDV9HZVPDeMfk3-tf0o4JD2NQgTze5V41rzvDhiFezs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sepideh@gmail.com\",\r\n    \"otp\": \"5694\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/user/getwalletbalance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"user",
+								"getwalletbalance"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDk4Mzk5Mn0.iWmdjselAGErUojTOPHxLoflG4MDg0XZCQraDejgLmQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "account delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bankName\": \"melli\",\r\n    \"branchName\": \"ferdosi\",\r\n    \"branchCode\": \"1234\",\r\n    \"cardNumber\": \"1212121212121213\",\r\n    \"cvv2\": \"123\",\r\n    \"userId\":\"7a28379d-88ed-43fc-98c8-6ae7713393e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/account/delete/95bf3f25-ea55-4e07-b9ce-1ad2fb90e5ae",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"account",
+								"delete",
+								"95bf3f25-ea55-4e07-b9ce-1ad2fb90e5ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "account add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bankName\": \"melli\",\r\n    \"branchName\": \"ferdosi\",\r\n    \"branchCode\": \"1234\",\r\n    \"cardNumber\": \"1212121212121214\",\r\n    \"cvv2\": \"123\",\r\n    \"userId\":\"7a28379d-88ed-43fc-98c8-6ae7713393e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/account/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"account",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bankName\": \"melli\",\r\n    \"branchName\": \"ferdosi\",\r\n    \"branchCode\": \"1234\",\r\n    \"cardNumber\": \"1212121212121214\",\r\n    \"cvv2\": \"123\",\r\n    \"userId\":\"7a28379d-88ed-43fc-98c8-6ae7713393e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/account/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"account",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "transaction add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"a_id\": \"b18436c8-5d10-4b72-96ce-c81a5aa41b43\",\r\n    \"u_id\": \"7a28379d-88ed-43fc-98c8-6ae7713393e1\",\r\n    \"operationType\": \"deposit\",\r\n    \"amount\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/transaction/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"transaction",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm deposit and withdraw",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/transaction/accept/f452e60e-5121-4c08-8bde-76d7c6217d4d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"transaction",
+								"accept",
+								"f452e60e-5121-4c08-8bde-76d7c6217d4d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"a_id\": \"b18436c8-5d10-4b72-96ce-c81a5aa41b43\",\r\n    \"u_id\": \"7a28379d-88ed-43fc-98c8-6ae7713393e1\",\r\n\r\n    \"wage\": 0.09,\r\n    \"typeOperation\": \"deposit\",\r\n    \"amount\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/transaction/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"transaction",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list deposits",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/transaction/deposits/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"transaction",
+								"deposits",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawals list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8888/transaction/withdrawals/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"transaction",
+								"withdrawals",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwZWxvcGVyQGdtYWlsLmNvbSIsImlkIjoiOWM3NmJkYmQtYWZiZS00MzVmLWIwMWEtNzFlNDFkNWZjMmY4IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzE0OTA0NDA3fQ.s62hxflfLAYA3Oo0V1TpNwh7JHq6vBM60QfG6T_Td2s",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
