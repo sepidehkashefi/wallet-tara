@@ -5,7 +5,7 @@ const db = require('../models')
 const Op = db.Op
 const resMessage = require('../config/responseMessage.config');
 var jwt = require('jsonwebtoken');
-
+const fs = require('node:fs');
 
 // localhost:8888/transaction/add
 // method post
@@ -18,7 +18,6 @@ exports.add = async (_req, _res) => {
             _res.send({ message: resMessage.OK_200.success })
 
         } catch (error) {
-
             _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
         }
     }
@@ -33,7 +32,6 @@ exports.add = async (_req, _res) => {
 exports.acceptTransaction = async (_req, _res) => {
 
     try {
-
 
         const transaction = await Transaction.findOne({ where: { t_id: _req.params.t_id, done: false } })
 
@@ -54,28 +52,36 @@ exports.acceptTransaction = async (_req, _res) => {
                 await User.update({ balance: Number(result.balance) + value }, { where: { u_id: transaction.u_id } })
                 await Transaction.update({ done: true }, { where: { t_id: transaction.t_id } })
 
+                // const content = ` user with id:${result.u_id}  \n with fee:${wage}  \n deposit ${amount} $ \n total balance of user is: ${Number(result.balance) + value}`;
+                // fs.writeFile(__dirname + '/files/test.txt', content, { overwrite: false }, err => {
+                //     if (err) {
+                //         console.error(err);
+                //     }
+                // });
+                // _res.sendFile(__dirname + '/files/test.txt', function (err) {
+                //     if (err) {
+                //         console.error('Error sending file:', err);
+                //     } else {
+                //         console.log('Sent:', __dirname + '/files/test.txt');
+                //     }
+                // });
 
-            } else
-                if (operationType == 'withdraw') {
 
-                    await User.update({ balance: Number(result.balance) - value }, { where: { u_id: transaction.u_id } })
-                    await Transaction.update({ done: true }, { where: { t_id: transaction.t_id } })
+            } else if (operationType == 'withdraw') {
 
+                await User.update({ balance: Number(result.balance) - amount }, { where: { u_id: transaction.u_id } })
+                await Transaction.update({ done: true }, { where: { t_id: transaction.t_id } })
+            }
 
-                }
-
+            return _res.send({ message: resMessage.OK_200.success })
 
         })
 
-        return _res.send({ message: resMessage.OK_200.success })
-
-
     } catch (error) {
+        console.log(error)
         _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error })
     }
 }
-
-
 
 
 // localhost:8888/transaction/list
@@ -85,9 +91,7 @@ exports.transactionLists = async (_req, _res) => {
     try {
 
         const transactions = await Transaction.findAll()
-
         return _res.send({ message: resMessage.OK_200.success, transactions })
-
 
     } catch (error) {
         console.log(error)
@@ -103,10 +107,8 @@ exports.listOfWithdrawals = async (_req, _res) => {
 
     try {
 
-        const transactions = await Transaction.findAll({where:{operationType:"withdraw",done:0}})
-
+        const transactions = await Transaction.findAll({ where: { operationType: "withdraw", done: 0 } })
         return _res.send({ message: resMessage.OK_200.success, transactions })
-
 
     } catch (error) {
         console.log(error)
@@ -122,10 +124,8 @@ exports.listOfDeposits = async (_req, _res) => {
 
     try {
 
-        const transactions = await Transaction.findAll({where:{operationType:"deposit",done:0}})
-
+        const transactions = await Transaction.findAll({ where: { operationType: "deposit", done: 0 } })
         return _res.send({ message: resMessage.OK_200.success, transactions })
-
 
     } catch (error) {
         console.log(error)

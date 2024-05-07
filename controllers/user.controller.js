@@ -4,12 +4,11 @@ const db = require('../models')
 const Op = db.Op
 const resMessage = require('../config/responseMessage.config');
 var jwt = require('jsonwebtoken');
-const { isAdmin } = require('../middleware/admin.middleware');
-const { Result } = require('tedious/lib/token/helpers');
 
-// localhost:8888/user/add
+
+// localhost:8888/auth/signup
 // method post
-exports.add = async (_req, _res) => {
+exports.signup = async (_req, _res) => {
 
     if (_req.body.email && _req.body.password) {
         try {
@@ -29,9 +28,10 @@ exports.add = async (_req, _res) => {
         _res.status(400).send({ message: resMessage.BAD_REQUEST_400.error_input })
     }
 }
-// localhost:8888/user/activeuser
+
+// localhost:8888/user/activateuser
 // method patch
-exports.activeUser = async (_req, _res) => {
+exports.activateUser = async (_req, _res) => {
 
     if (_req.body.email && _req.body.isActive) {
         try {
@@ -56,9 +56,11 @@ exports.activeUser = async (_req, _res) => {
 }
 
 
-// localhost:8888/user/list
+// localhost:8888/user/getUserList
 // method get
-exports.list = (_req, _res) => {
+exports.getUserList = (_req, _res) => {
+
+    console.log("ddddddddddddddddddddddddddd");
     User.findAll()
         .then(_result => {
 
@@ -75,34 +77,28 @@ exports.list = (_req, _res) => {
 }
 
 
-// localhost:8888/user/login
+// localhost:8888/auth/signin
 // method post
-exports.login = async (_req, _res) => {
+exports.signin = async (_req, _res) => {
 
     if (_req.body.email && _req.body.email.trim().length > 0 &&
         _req.body.password && _req.body.password.trim().length > 0) {
 
-
         await User.findOne({
             where: {
-                [Op.or]: [{ email: _req.body.email, password: _req.body.password }]
+                [Op.and]: [{ email: _req.body.email, password: _req.body.password }]
             }
 
         }).then(async (_result) => {
 
-            console.log(_result)
             if (_result) {
 
-
                 var token = jwt.sign({ name: _req.body.email, id: _result.u_id, isAdmin: _result.isAdmin }, 'tara');
-
-
                 _res.status(200).send({ message: resMessage.OK_200, token })
             }
 
         })
             .catch(error => {
-
                 _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
             })
     }
@@ -119,7 +115,7 @@ exports.requestOtp = async (_req, _res) => {
 
         await User.findOne({
             where: {
-                [Op.or]: [{ email: _req.body.email }]
+                email: _req.body.email
             }
 
         }).then(async (_result) => {
@@ -157,15 +153,15 @@ exports.sendOtp = async (_req, _res) => {
 
         await User.findOne({
             where: {
-                [Op.or]: [{ email: _req.body.email, otp: _req.body.otp }]
+                [Op.and]: [{ email: _req.body.email, otp: _req.body.otp }]
             }
 
         }).then(async (_result) => {
 
             if (_result) {
 
-                var token = jwt.sign({ name: _req.body.email, id: _result.u_id, isAdmin: _result.isAdmin }, 'tara');
-                _res.status(200).send({ message: resMessage.OK_200, token })
+                await User.update({ isActive: 'active' }, { where: { email: _req.body.email } })
+                _res.status(200).send({ message: resMessage.OK_200 })
             }
 
         })
@@ -182,12 +178,7 @@ exports.sendOtp = async (_req, _res) => {
 exports.getWalletBalance = async (_req, _res) => {
 
 
-    await User.findOne({
-        where: {
-            u_id: _req.userId
-        }
-
-    }).then(async (_result) => {
+    await User.findOne({ where: { u_id: _req.userId } }).then(async (_result) => {
 
         if (_result) {
             _res.status(200).send({ message: resMessage.OK_200, balance: _result.balance })

@@ -14,8 +14,7 @@ const registerSchema = Joi.object({
     phone: Joi.number().required(),
     address: Joi.string(),
     balance: Joi.string(),
-    otp: Joi.string(),
-
+  
 });
 
 module.exports = registerSchema;

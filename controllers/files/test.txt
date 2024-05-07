@@ -1,0 +1,4 @@
+ user with id:7a28379d-88ed-43fc-98c8-6ae7713393e1  
+ with fee:0.01  
+ deposit 12 $ 
+ total balance of user is: 210.95999999999995

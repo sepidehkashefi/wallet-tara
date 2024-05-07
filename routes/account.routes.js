@@ -14,7 +14,7 @@ module.exports = function (app) {
 	})
 
 
-	app.post('/account/add', [Validator('account')], controller.add)// `POST /bank-accounts`: Add a new bank account.
-	app.delete('/account/delete/:a_id', controller.delete)// `DELETE /bank-accounts/{id}`: Delete a bank account.
-	app.get('/account/list', controller.list) // `GET /bank-accounts`: List user bank accounts.
+	app.post('/bank-accounts', [auth.verifyToken, Validator('account')], controller.add)//Add a new bank account.
+	app.delete('/bank-accounts/:a_id', [auth.verifyToken], controller.delete)// `DELETE /bank-accounts/{id}`: Delete a bank account.
+	app.get('/account/list', [auth.verifyToken], controller.list) // `GET /bank-accounts`: List user bank accounts.
 }

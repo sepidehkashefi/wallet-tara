@@ -24,7 +24,10 @@ module.exports = (connection, Sequelize) => {
         done: {
             type: Sequelize.BOOLEAN,
         },
-       amount : {
+        amount: {
+            type: Sequelize.STRING,
+        },
+        executeDate: {
             type: Sequelize.STRING,
         },
 
