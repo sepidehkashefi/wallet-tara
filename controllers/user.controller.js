@@ -60,7 +60,6 @@ exports.activateUser = async (_req, _res) => {
 // method get
 exports.getUserList = (_req, _res) => {
 
-    console.log("ddddddddddddddddddddddddddd");
     User.findAll()
         .then(_result => {
 

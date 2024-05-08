@@ -1,4 +1,5 @@
 
+
 const Transaction = require('../models').transaction;
 const User = require('../models').user;
 const db = require('../models')
@@ -6,7 +7,7 @@ const Op = db.Op
 const resMessage = require('../config/responseMessage.config');
 var jwt = require('jsonwebtoken');
 const fs = require('node:fs');
-
+const path=require('path')
 // localhost:8888/transaction/add
 // method post
 exports.add = async (_req, _res) => {
@@ -52,32 +53,43 @@ exports.acceptTransaction = async (_req, _res) => {
                 await User.update({ balance: Number(result.balance) + value }, { where: { u_id: transaction.u_id } })
                 await Transaction.update({ done: true }, { where: { t_id: transaction.t_id } })
 
-                // const content = ` user with id:${result.u_id}  \n with fee:${wage}  \n deposit ${amount} $ \n total balance of user is: ${Number(result.balance) + value}`;
-                // fs.writeFile(__dirname + '/files/test.txt', content, { overwrite: false }, err => {
-                //     if (err) {
-                //         console.error(err);
-                //     }
-                // });
-                // _res.sendFile(__dirname + '/files/test.txt', function (err) {
-                //     if (err) {
-                //         console.error('Error sending file:', err);
-                //     } else {
-                //         console.log('Sent:', __dirname + '/files/test.txt');
-                //     }
-                // });
+                return _res.send({ message: resMessage.OK_200.success })
 
-
-            } else if (operationType == 'withdraw') {
+            } else if (operationType == 'withdraw' && _req.file != undefined) {
 
                 await User.update({ balance: Number(result.balance) - amount }, { where: { u_id: transaction.u_id } })
                 await Transaction.update({ done: true }, { where: { t_id: transaction.t_id } })
+
+                const d = new Date();
+                const year = d.getFullYear();
+                const month = d.getMonth();
+                const day = d.getDate();
+
+                var dir = `${year}-${month}-${day}`;
+
+                let newpath = path.join(__basedir, 'upload', dir)
+
+                if (!fs.existsSync(newpath))
+                    fs.mkdirSync(newpath, { recursive: true })
+                let data = fs.readFileSync(__tempUpload + _req.file.filename)
+
+                _req.file.originalname = `${Date.now()}`
+                fs.writeFileSync(path.join(newpath, _req.file.originalname), data)
+                fs.unlinkSync(__tempUpload + _req.file.filename)
+
+
+
+
+
+
+                return _res.send({ message: resMessage.OK_200.success })
+
+
             }
 
-            return _res.send({ message: resMessage.OK_200.success })
-
         })
-
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error)
         _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error })
     }

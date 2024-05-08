@@ -2,7 +2,10 @@ const express = require('express')
 require('dotenv').config({ path: './config.env' })
 const db = require('./models');
 const app = express();
+const multer  = require('multer')
 
+global.__basedir = __dirname;
+global.__tempUpload = __dirname + '/tempUpload/'
 
 db.connection.sync(
     {
