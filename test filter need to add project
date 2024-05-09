@@ -1,0 +1,117 @@
+let filterQuery ={filter: [
+
+    ['Category', '=', 'Video Players'],
+    'or',
+    [
+        ['Category', '=', 'Monitors'],
+        'and',
+        ['Price', 'between', [165, 700]],
+    ],
+    'or',
+    [
+        ['Category', '=', 'Televisions'],
+        'and',
+        ['Price', 'between', [2000, 4000]],
+    ],
+
+]
+}
+
+
+function rep(_el) {
+    if (Array.isArray(_el)) {
+
+        if ((typeof _el[0] === 'string' || _el[0] instanceof String) && (typeof _el[1] === 'string' || _el[1] instanceof String)
+            && (typeof _el[2] === 'string' || _el[2] instanceof String)) {
+            if (_el[1] == 'contains') {
+                _el[1] = "like"
+                _el[2] = `N'%` + _el[2] + `%'`
+            } else if (_el[1] == 'startswith') {
+                _el[1] = "like"
+                _el[2] = `N'` + _el[2] + `%'`
+            } else if (_el[1] == 'notcontains') {
+                _el[1] = "not like"
+                _el[2] = `N'%` + _el[2] + `%'`
+            } else if (_el[1] == 'endswith') {
+                _el[1] = "like "
+                _el[2] = `N'%` + _el[2] + `'`
+            }
+            else if (["=", ">", ">=", "<", "<=", "<>"].includes(_el[1])) {
+                _el[2] = `N'` + _el[2] + `'`
+            }
+            else
+                _el[2] = `N'` + _el[2] + `'`
+        }
+        else {
+            _el.forEach(elem => {
+                let validate = false
+                if (elem.length == 3) {
+                    if (typeof elem[0] === 'string' || elem[0] instanceof String)
+                        if (typeof elem[1] === 'string' || elem[1] instanceof String)
+                            if (typeof elem[2] === 'string' || elem[2] instanceof String) {
+                                validate = true
+                                if (elem[1] == 'contains') {
+                                    elem[1] = "like"
+                                    elem[2] = `N'%` + elem[2] + `%'`
+                                } else if (elem[1] == 'startswith') {
+                                    elem[1] = "like"
+                                    elem[2] = `N'` + elem[2] + `%'`
+                                } else if (elem[1] == 'notcontains') {
+                                    elem[1] = "not like"
+                                    elem[2] = `N'%` + elem[2] + `%'`
+                                } else if (elem[1] == 'endswith') {
+                                    elem[1] = "like "
+                                    elem[2] = `N'%` + elem[2] + `'`
+                                }
+                                else if (["=", ">", ">=", "<", "<=", "<>"].includes(elem[1])) {
+                                    elem[2] = `N'` + elem[2] + `'`
+                                }
+                                else
+                                    elem[2] = `N'` + elem[2] + `'`
+                            }
+                }
+                if (!validate)
+                    elem = rep(elem)
+            }
+            )
+        }
+
+        return _el
+    }
+    else {
+        return null
+    }
+}
+
+
+function returnFilter(strFilter) {
+    let query = ''
+
+    if (strFilter.filter) {
+        query = JSON.stringify(rep(strFilter.filter))
+        query = "where " + query + ' '
+    }
+
+    query = query.replaceAll('[', '(').replaceAll(']', ')').replaceAll('"!"', 'not').replaceAll(',', ' ').replaceAll('"', '')
+
+    let sort = "order by "
+    if (strFilter.sort && Array.isArray(strFilter.sort)) {
+        strFilter.sort.forEach(element => { sort += "  ," + element.selector + (element.desc ? " DESC" : " ASC") });
+
+        sort = sort.replace(",", "")
+    } else {
+        sort += ' createdAt DESC'
+    }
+
+    let offset = `offset ${strFilter.skip ? strFilter.skip : 0} rows FETCH NEXT ${strFilter.take ? strFilter.take : 50} ROWS ONLY`
+
+    sort = sort + " " + offset
+
+    return { filterQuery: query, sortQuery: sort }
+}
+
+
+
+let c=returnFilter(filterQuery)
+
+console.log(c);
