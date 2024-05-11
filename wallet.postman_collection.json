@@ -322,11 +322,21 @@
 				{
 					"name": "transaction add",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTE0NTcyMn0.QDW95INKKdjSG0q6Bwz1qypG9kuAEfqmFYp0rOwfU70",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"a_id\": \"b18436c8-5d10-4b72-96ce-c81a5aa41b43\",\r\n    \"u_id\": \"7a28379d-88ed-43fc-98c8-6ae7713393e1\",\r\n    \"operationType\": \"deposit\",\r\n    \"amount\": \"12\"\r\n}",
+							"raw": "{\r\n    \"a_id\": \"b18436c8-5d10-4b72-96ce-c81a5aa41b43\",\r\n    \"u_id\": \"7a28379d-88ed-43fc-98c8-6ae7713393e1\",\r\n    \"operationType\": \"deposit\",\r\n    \"amount\": \"162\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -435,22 +445,32 @@
 					"response": []
 				},
 				{
-					"name": "transaction all list",
+					"name": "approve",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTA4OTAzMH0.wDNfSzJmbOywz8JETajQUkIIwylqRqCqE_dfifgq140",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTQwNDMwM30.I6m9UbjnQzyeOz6G48RSlr0Sd8-2gd5L_1HV296OL-8",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Backend/Desktop/Capture.PNG"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://localhost:8888/admin/transactions",
+							"raw": "http://localhost:8888/admin/transaction/f452e60e-5121-4c08-8bde-76d7c6217d4d/approve",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -458,7 +478,16 @@
 							"port": "8888",
 							"path": [
 								"admin",
-								"transactions"
+								"transaction",
+								"f452e60e-5121-4c08-8bde-76d7c6217d4d",
+								"approve"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "dep",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -519,6 +548,116 @@
 							"path": [
 								"admin",
 								"withdrawals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTQwNDMwM30.I6m9UbjnQzyeOz6G48RSlr0Sd8-2gd5L_1HV296OL-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Backend/Desktop/Capture.PNG"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8888/admin/transaction/f452e60e-5121-4c08-8bde-76d7c6217d4d/approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"admin",
+								"transaction",
+								"f452e60e-5121-4c08-8bde-76d7c6217d4d",
+								"approve"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transaction list all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTQwNDMwM30.I6m9UbjnQzyeOz6G48RSlr0Sd8-2gd5L_1HV296OL-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\": [\r\n          [\r\n            [\r\n                \"amount\",\r\n                \"=\",\r\n                162\r\n            ],\r\n            \"and\",\r\n            [\r\n                \"operationType\",\r\n                \"=\",\r\n                \"deposit\"\r\n            ]\r\n        ],\r\n        \"or\",\r\n        [\r\n            [\r\n                \"amount\",\r\n                \"=\",\r\n                100\r\n            ],\r\n            \"and\",\r\n            [\r\n                \"operationType\",\r\n                \"=\",\r\n                \"withdraw\"\r\n            ]\r\n        ]\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/admin/transactions/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"admin",
+								"transactions",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "web3",
+			"item": [
+				{
+					"name": "get balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/web3/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"web3",
+								"balance"
 							]
 						}
 					},
