@@ -16,7 +16,7 @@ module.exports = function (app) {
         next()
     })
 
-
+    app.post('/admin/addadmin', [auth.verifyToken, admin.isAdmin],userController.addAdmin)
 
     app.patch('/admin/activateuser', [auth.verifyToken, admin.isAdmin], userController.activateUser)
     app.get('/admin/getuserlist', [auth.verifyToken, admin.isAdmin], userController.getUserList)

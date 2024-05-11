@@ -637,6 +637,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "add admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2VwaWRlaEBnbWFpbC5jb20iLCJpZCI6Ijk5MTIxNjMxLTkyZjAtNGI3ZS05ODhhLTQzNDUyOWUxNDI3MCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTQwNDMwM30.I6m9UbjnQzyeOz6G48RSlr0Sd8-2gd5L_1HV296OL-8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"ayda4\",\r\n    \"lastName\": \"kashefi4\",\r\n    \"email\": \"ayda4@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"identityId\": \"5050049455\",\r\n    \"phone\": \"09039403155\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/admin/addadmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"admin",
+								"addadmin"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

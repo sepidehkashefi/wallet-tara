@@ -29,6 +29,39 @@ exports.signup = async (_req, _res) => {
     }
 }
 
+
+
+
+
+// localhost:8888/admin/addadmin
+// method post
+exports.addAdmin = async (_req, _res) => {
+
+    if (_req.body.email && _req.body.password) {
+        try {
+            const user = await User.findAll({ where: { email: _req.body.email } })
+            if (user.length > 0) {
+                return _res.status(400).send({ message: resMessage.BAD_REQUEST_400.duplicate_record })
+            }
+            await User.create({ ..._req.body, isActive: "initial", isAdmin: 1 })
+            _res.send({ message: resMessage.OK_200.success })
+
+        } catch (error) {
+
+            _res.status(500).send({ message: resMessage.INTERNAL_SERVER_500.server_error, error })
+        }
+    }
+    else {
+        _res.status(400).send({ message: resMessage.BAD_REQUEST_400.error_input })
+    }
+}
+
+
+
+
+
+
+
 // localhost:8888/user/activateuser
 // method patch
 exports.activateUser = async (_req, _res) => {
