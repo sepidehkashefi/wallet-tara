@@ -1,17 +1,3 @@
-let filterQuery ={filter: [
-
-    ['Category', '=', 'Video Players'],
-    'or',
-    [
-        ['operationType', '=', 'Monitors'],
-        'and',
-        ['Price', 'between', [165, 700]],
-    ],
-
-
-]
-}
-
 
 function rep(_el) {
     if (Array.isArray(_el)) {
@@ -98,7 +84,9 @@ function returnFilter(strFilter) {
         sort += ' createdAt DESC'
     }
 
-    let offset = `offset ${strFilter.skip ? strFilter.skip : 0} rows FETCH NEXT ${strFilter.take ? strFilter.take : 50} ROWS ONLY`
+  //  let offset = `offset ${strFilter.skip ? strFilter.skip : 0} rows FETCH NEXT ${strFilter.take ? strFilter.take : 50} ROWS ONLY`
+
+    let offset = `limit ${strFilter.take ? strFilter.take : 50} offset  ${strFilter.skip ? strFilter.skip : 0}`
 
     sort = sort + " " + offset
 
@@ -106,7 +94,8 @@ function returnFilter(strFilter) {
 }
 
 
+const filterFuncs = {
+    returnFilter
+}
 
-let c=returnFilter(filterQuery)
-
-console.log(c);
+module.exports = filterFuncs

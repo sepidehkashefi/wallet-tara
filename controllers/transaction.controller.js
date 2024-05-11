@@ -3,11 +3,14 @@
 const Transaction = require('../models').transaction;
 const User = require('../models').user;
 const db = require('../models')
+const Connection = require('../models').connection;
 const Op = db.Op
 const resMessage = require('../config/responseMessage.config');
 var jwt = require('jsonwebtoken');
 const fs = require('node:fs');
-const path=require('path')
+const path = require('path')
+const filterFuncs = require('../funcs/filter.funcs')
+
 // localhost:8888/transaction/add
 // method post
 exports.add = async (_req, _res) => {
@@ -100,9 +103,14 @@ exports.acceptTransaction = async (_req, _res) => {
 // method get
 exports.transactionLists = async (_req, _res) => {
 
-    try {
+    let {
+        filterQuery = '', sortQuery = ''
+    } = Object.keys(_req.body).length == 0 ? "" : filterFuncs.returnFilter(_req.body)
 
-        const transactions = await Transaction.findAll()
+    try {
+        const transactions = await Connection.query(`SELECT * from transaction ${filterQuery} ${sortQuery} `,
+            { type: db.Sequelize.QueryTypes.SELECT })
+
         return _res.send({ message: resMessage.OK_200.success, transactions })
 
     } catch (error) {
